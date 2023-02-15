@@ -1,0 +1,11 @@
+INFO:root:Initiating Procedure @2023-02-14 13:56:52.768929
+INFO:root:Fetching weather data
+INFO:geocoder.base:Requested http://ipinfo.io/json
+INFO:root:Calculated Parameters 2023-02-14T00:00:00Z, t_2m:C, json, 32.7813,-96.8019, https://api.meteomatics.com/2023-02-14T00:00:00Z/t_2m:C/32.7813,-96.8019/json
+INFO:root:Initiating Request https://api.meteomatics.com/2023-02-14T00:00:00Z/t_2m:C/32.7813,-96.8019/json, {}, {}, auth-> others_salman, Hkz6dWB20U
+INFO:root:Response https://api.meteomatics.com/2023-02-14T00:00:00Z/t_2m:C/32.7813,-96.8019/json, {}, {}, auth-> others_salman, Hkz6dWB20U, Response -> 200, {"version":"3.0","user":"others_salman","dateGenerated":"2023-02-14T19:56:53Z","status":"OK","data":[{"parameter":"t_2m:C","coordinates":[{"lat":32.7813,"lon":-96.8019,"dates":[{"date":"2023-02-14T00:00:00Z","value":15.8}]}]}]}
+
+INFO:root:Fetching Data Done
+INFO:root:MongoDB Connection is connected successfully!!
+INFO:root:Data inserted successfully!!
+INFO:root:End Procedure @2023-02-14 13:56:53.427468
