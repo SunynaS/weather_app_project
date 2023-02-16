@@ -1,17 +1,18 @@
 import logging
 from datetime import datetime
-
+import yaml
 import geocoder
 import requests
 from pymongo import MongoClient
 
 logging.basicConfig(filename='app.log', level=logging.INFO)
-
+with open('config.yml', 'r') as infile:
+    config= yaml.load(infile)
 
 # Hitting GET Request
 def hit_get_request(url: str, headers: dict = dict(), query_params=dict()) -> dict:
-    username = 'others_salman'
-    password = 'Hkz6dWB20U'
+    username = config['USERNAME']
+    password = config['PASSWORD']
     logging.info(f"Initiating Request {url}, {headers}, {query_params}, auth-> {username}, {password}")
     resp = requests.get(url, auth=(username, password))
     logging.info(
@@ -23,7 +24,7 @@ def hit_get_request(url: str, headers: dict = dict(), query_params=dict()) -> di
 
 # Giving connection object of that collection of mongo DB
 def get_mongodb_connection():
-    client = MongoClient('localhost', 27017)
+    client = MongoClient(config['MONGO_HOST'], config['MONGO_PORT'])
     return client.weather_database.weather_details
 
 
@@ -33,7 +34,7 @@ def fetch_current_weather_data() -> dict:
     temps_unit = "t_2m:C"
     output_format = "json"
     current_location_lat_long = ','.join(map(str, geocoder.ip('me').latlng))
-    url = f"https://api.meteomatics.com/{current_time}/{temps_unit}/{current_location_lat_long}/{output_format}"
+    url = f"{config['WEATHER_URL']}/{current_time}/{temps_unit}/{current_location_lat_long}/{output_format}"
     logging.info(
         f"Calculated Parameters {current_time}, {temps_unit}, {output_format}, {current_location_lat_long}, {url}")
     data = hit_get_request(url)
